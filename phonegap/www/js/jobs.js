@@ -8,19 +8,6 @@ function createJobObject (lat, lon, height, innerregio, outerregion){
     this.outerregion = outerregion
 };
 
-var timeGeoloc      //timer geoposition needed to stop the timer
-
-function myTimeFunction() {
-    console.log("starting again" + timeInterval)
-    timeGeoloc = setTimeout(position, timeInterval);
-}
-
-function myStopFunction() {
-    clearTimeout(timeGeoloc);
-    console.log("Timing has stopped");
-}
-
-// jobs
 var jobsmap = new Map(); //Catched values of the requeust
 var jobsmapkeys = []
 var positionjob = 0
@@ -44,7 +31,7 @@ function getJobsFunc() {
                 jobsmapkeys = []
                 for (value in data.jobs){
                     var str = (data.jobs[value].geomtask).split(" ");       //calculate lat,lon,height from string "Point Z (2.44 4.323 5)"
-                    var lon = parseFloat((str[2]).substring(1));
+                    var lon = parseFloat((str[2]).substring(1));            // aanpassen los verkrijgen van de database!!!
                     var lat = parseFloat(str[3]);
                     var lengthz = (str[4]).length;
                     var height = parseFloat((str[4]).substring(0, (lengthz - 1)));

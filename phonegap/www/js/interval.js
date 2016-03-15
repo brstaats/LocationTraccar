@@ -2,12 +2,22 @@
 
 var timeInterval = 3000  // startwaarde moet vervangen worden voor server logic
 
+var timeGeoloc      //timer geoposition needed to stop the timer
+
+function myTimeFunction() {
+    console.log("starting again" + timeInterval)
+    timeGeoloc = setTimeout(position, timeInterval);
+}
+
+function myStopFunction() {
+    clearTimeout(timeGeoloc);
+    console.log("Timing has stopped");
+}
+
 function toRad(Value) {
     /** Converts numeric degrees to radians */
     return Value * Math.PI / 180;
 }
-
-
 
 function calcInterval (longitude1,latitude1,altitude1){
    //console.log("this should be the jobs " + jobsmap[10]);     positionjob.lat
