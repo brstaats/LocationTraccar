@@ -31,7 +31,7 @@ function getJobsFunc() {
                 jobsmapkeys = []
                 for (value in data.jobs){
                     var str = (data.jobs[value].geomtask).split(" ");       //calculate lat,lon,height from string "Point Z (2.44 4.323 5)"
-                    var lon = parseFloat((str[2]).substring(1));            // aanpassen los verkrijgen van de database!!!
+                    var lon = parseFloat((str[2]).substring(1));                    // aanpassen los verkrijgen van de database!!! ST_X, ST_Y
                     var lat = parseFloat(str[3]);
                     var lengthz = (str[4]).length;
                     var height = parseFloat((str[4]).substring(0, (lengthz - 1)));
