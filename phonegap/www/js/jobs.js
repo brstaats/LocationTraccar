@@ -34,11 +34,11 @@ function getJobsFunc() {
                     var lon = parseFloat((str[2]).substring(1));                    // aanpassen los verkrijgen van de database!!! ST_X, ST_Y
                     var lat = parseFloat(str[3]);
                     var lengthz = (str[4]).length;
-                    var height = parseFloat((str[4]).substring(0, (lengthz - 1)));
+                    var height = 6
 
                     var y = data.jobs[value]        //making of a map v
 
-                    var datalist = [y.interval.uuid, y.enddate, parseFloat(y.innerregion_meter), parseFloat(y.outerregion_meter), lon, lat,height]
+                    var datalist = [y.interval.uuid, y.enddate, parseFloat(y.innerregion_meter), parseFloat(y.outerregion_meter), lon, lat, height]
                     jobsmap.set(parseInt(data.jobs[value].priority), datalist);     //add a key value pair
                     jobsmapkeys.push(parseInt(data.jobs[value].priority));          //add the key values to a list
                 };
