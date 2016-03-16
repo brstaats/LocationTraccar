@@ -1,4 +1,4 @@
-var getJobs = getJobsFunc()
+var getJobs = getJobsFunc()         // automatic start at the beginning of the app
 
 function createJobObject (lat, lon, height, innerregio, outerregion){
     this.lat = lat
@@ -48,8 +48,11 @@ function getJobsFunc() {
         }else{
             coneole.log("it has not worked..." )
         }
+    console.log(positionjob)
+    //calcInterval(4.6584330, 52.1340470, 5, 10);
+
     });
- }
+ };
 
 function mostimportantjob() {
     var highestpriority = Math.min.apply(Math,jobsmapkeys);         // Calculate and copy gets the highest priority job
