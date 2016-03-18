@@ -1,4 +1,4 @@
-var ip = "http://158.234.169.77:8080";
+var ip = "http://158.234.169.77:8080"                //"http://158.234.169.77:8080";
 
 function showTrackers(uuid,name) {
 

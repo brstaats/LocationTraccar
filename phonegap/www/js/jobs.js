@@ -23,6 +23,7 @@ function getJobsFunc() {
         //console.log("ResponseMessage: " + data.responseMessage + "<br>ResponseCode: " + data.responseCode);
         if (data.responseCode == "200") {
             // available data:enddate, innerregion_meter, outerregion_meter, priority, interval.uuid
+            console.log(data);
             if (data.jobs.length == 0) {
                 console.log("there is no job for you");
                 jobsmapkeys = []
@@ -30,23 +31,16 @@ function getJobsFunc() {
             } else {
                 jobsmapkeys = []
                 for (value in data.jobs){
-                    var str = (data.jobs[value].geomtask).split(" ");       //calculate lat,lon,height from string "Point Z (2.44 4.323 5)"
-                    var lon = parseFloat((str[2]).substring(1));                    // aanpassen los verkrijgen van de database!!! ST_X, ST_Y
-                    var lat = parseFloat(str[3]);
-                    var lengthz = (str[4]).length;
-                    var height = 6
-
                     var y = data.jobs[value]        //making of a map v
-
-                    var datalist = [y.interval.uuid, y.enddate, parseFloat(y.innerregion_meter), parseFloat(y.outerregion_meter), lon, lat, height]
+                    var datalist = [y.interval.uuid, y.enddate, parseFloat(y.innerregion_meter), parseFloat(y.outerregion_meter), parseFloat(y.longitude), parseFloat(y.latitude), parseFloat(y.altitude), y.name, y.finished]
                     jobsmap.set(parseInt(data.jobs[value].priority), datalist);     //add a key value pair
                     jobsmapkeys.push(parseInt(data.jobs[value].priority));          //add the key values to a list
                 };
-                mostimportantjob()
+                mostimportantjob();
 
             }
         }else{
-            coneole.log("it has not worked..." )
+            console.log("it has not worked..." )
         }
     console.log(positionjob)
     //calcInterval(4.6584330, 52.1340470, 5, 10);
@@ -58,7 +52,7 @@ function mostimportantjob() {
     var highestpriority = Math.min.apply(Math,jobsmapkeys);         // Calculate and copy gets the highest priority job
     var x = jobsmap.get(highestpriority)
     positionjob = new createJobObject(x[4], x[5],x[6],x[2],x[3]);
-    //console.log("jobs string")
+    console.log("jobs string")
     console.log(positionjob.lat);
-    //console.log(jobsmapkeys);
+    console.log(jobsmapkeys);
 };
