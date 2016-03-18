@@ -1,0 +1,42 @@
+Ext.define('Traccar.model.Jobs', {
+    extend: 'Ext.data.Model',
+    identifier: 'negative',
+
+    fields: [{
+        name: 'uuid',
+        type: 'string'
+    }, {
+        name: 'name',
+        type: 'string'
+    }, {
+        name: 'client_uuid',
+        type: 'int'
+    }, {
+        name: 'startdate',
+        type: 'date'
+    }, {
+        name: 'enddate',
+        type: 'date'
+    }, {
+        name: 'outerregion_meter',
+        type: 'float'
+    }, {
+        name: 'innerregion_meter',
+        type: 'float'
+    }, {
+        name: 'priority',
+        type: 'float'
+    }, {
+        name: 'finished',
+        type: 'float'
+    }, {
+        name: 'latitude',
+        type: 'float'
+    }, {
+        name: 'longitude',
+        type: 'float'
+    }, {
+        name: 'altitude',
+        type: 'float'
+    }]
+});
