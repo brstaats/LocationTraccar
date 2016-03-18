@@ -5,23 +5,23 @@ package locationserver.trackers;
  */
 public class Interval {
 
-    String uuid, geomtask, enddate, innerregion_meter, outerregion_meter, priority;
+    String uuid, geomtask, enddate, innerregion_meter, outerregion_meter, priority, name, latitude, finished, longitude, altitude;
 
-    public Interval(String uuid, String geomtask, String enddate, String innerregion_meter, String outerregion_meter, String priority) {
+    public Interval(String uuid, String enddate, String innerregion_meter, String outerregion_meter, String priority, String name, String latitude, String finished, String longitude, String altitude) {
         this.uuid = uuid;
-        this.geomtask = geomtask;
         this.enddate = enddate;
         this.innerregion_meter = innerregion_meter;
         this.outerregion_meter = outerregion_meter;
         this.priority = priority;
+        this.name = name;
+        this.latitude = latitude;
+        this.finished = finished;
+        this.longitude = longitude;
+        this.altitude = altitude;
     }
 
     public String getUuid() {
         return uuid;
-    }
-
-    public String getGeomtask() {
-        return geomtask;
     }
 
     public String getEnddate() {
@@ -38,5 +38,25 @@ public class Interval {
 
     public String getPriority() {
         return priority;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getFinished() {
+        return finished;
+    }
+
+    public String getAltitude() {
+        return altitude;
     }
 }

@@ -562,7 +562,7 @@ public class Connector {
 
         try {
             ResultSet r;
-            r=s.executeQuery("select uuid, enddate, outerregion_meter, innerregion_meter, st_astext(geomtask) geomtask, priority from jobs j join jobtrackerlink jo ON j.uuid = jo.job_uuid where device_uuid = " + tracker_uuid + " and + client_uuid = " + client_uuid);
+            r=s.executeQuery("select uuid, name, enddate, outerregion_meter, innerregion_meter, finished, latitude, longitude, altitude, priority from jobs j join jobtrackerlink jo ON j.uuid = jo.job_uuid where device_uuid = " + tracker_uuid + " and + client_uuid = " + client_uuid);
 
 
 //            if (client_uuid != null) {
@@ -581,16 +581,19 @@ public class Connector {
                         case "client_uuid":
                         case "startdate":
                         case "enddate":
-                        case "geomtask":
                         case "innerregion_meter":
                         case "outerregion_meter":
                         case "priority":
+                        case "latitude":
+                        case "longitude":
+                        case "altitude":
+                        case "finished":
                         default:
                             results.put(r.getMetaData().getColumnName(i), r.getString(i));
                     }
                 }
 
-                Interval interval = new Interval(r.getString("uuid"), r.getString("geomtask"), r.getString("enddate"), r.getString("outerregion_meter"), r.getString("innerregion_meter"), r.getString("priority"));
+                Interval interval = new Interval(r.getString("uuid"), r.getString("name"),r.getString("latitude"),r.getString("finished"),r.getString("longitude"),r.getString("altitude"), r.getString("enddate"), r.getString("outerregion_meter"), r.getString("innerregion_meter"), r.getString("priority"));
                 Job job = new Job(interval, results);
                 jobs.add(job);
             }
