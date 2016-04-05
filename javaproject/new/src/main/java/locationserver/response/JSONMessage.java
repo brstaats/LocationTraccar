@@ -103,11 +103,15 @@ public class JSONMessage {
                         JSONObject intobject = new JSONObject();
                         intobject.put("uuid", entry.getValue());
                         intobject.put("uuid", job.getInterval().getUuid());
-                        intobject.put("geomtask", job.getInterval().getGeomtask());
                         intobject.put("enddate", job.getInterval().getEnddate());
                         intobject.put("innerregion_meter", job.getInterval().getInnerregion_meter());
                         intobject.put("outerregion_meterclose", job.getInterval().getOuterregion_meter());
                         intobject.put("priority", job.getInterval().getPriority());
+                        intobject.put("name", job.getInterval().getName());
+                        intobject.put("latitude", job.getInterval().getLatitude());
+                        intobject.put("finished", job.getInterval().getFinished());
+                        intobject.put("longitude", job.getInterval().getLongitude());
+                        intobject.put("altitude", job.getInterval().getAltitude());
 
                         object.put("interval", intobject);
                     } else {

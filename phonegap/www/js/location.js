@@ -14,7 +14,7 @@ function onSuccess(position) {
         var accuracy = position.coords.accuracy
         var altitudeAccuracy = position.coords.altitudeAccuracy
         var heading = position.coords.heading
-        var speed = position.coords.speed
+        var speed = position.coords.speed       //meters per second
         var timestamp = position.timestamp
         var latlon = String(latitude)+" "+String(longitude)
         alert(latlon);
@@ -30,7 +30,7 @@ function onSuccess(position) {
 
         insertLocation(id,deviceId,datetime,longitude,latitude,altitude,accuracy,speed, altitudeAccuracy, timeInterval);
         console.log(latitude);
-        calcInterval(longitude,latitude,altitude);
+        calcInterval(longitude,latitude,altitude, speed);
         setTimeout(function(){myTimeFunction()}, 500);
 
 
