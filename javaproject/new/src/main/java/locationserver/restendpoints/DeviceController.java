@@ -1,7 +1,8 @@
 package locationserver.restendpoints;
 
 
-import locationserver.model.Tracker;
+import locationserver.database.DatabaseConnection;
+import locationserver.model.Device;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,33 +14,31 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/tracker")
-public class TrackerController {
+public class DeviceController {
 
-    List<Tracker> list = new ArrayList<>();
+    List<Device> list;
 
-    @RequestMapping(value = "/{clientId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tracker> getAllTrackers(@PathVariable("clientId") int clientId){
-
-
-    return null;
+    @RequestMapping(value = "/getAllDevices", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Device> getAllTrackers(){
+    return new DatabaseConnection().getDevices();
     }
 
     @RequestMapping(value = "removeTracker/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public List<Tracker> deleteTracker(@PathVariable("id") int id) {
-return list;
+    public List<Device> deleteTracker(@PathVariable("id") int id) {
+return new ArrayList<>();
     }
 
     @RequestMapping(value = "/getTracker/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Tracker getTracker(@PathVariable("id") int id) {
+    public Device getTracker(@PathVariable("id") int id) {
         if (id > list.size()) {
             return null;
         }
 
-        for (Tracker Tracker : list) {
-            if (id == Tracker.getId()) {
-                return Tracker;
+        for (Device device : list) {
+            if (id == device.getId()) {
+                return null;
             }
         }
         return null;
@@ -47,9 +46,9 @@ return list;
 
     @RequestMapping(value = "/addTracker", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Tracker> addTracker(@RequestBody Tracker Tracker) {
+    public List<Device> addTracker(@RequestBody Device device) {
 
-        list.add(Tracker);
+
         return list;
     }
 
