@@ -3,6 +3,7 @@ package locationserver.restendpoints;
 
 import locationserver.database.DatabaseConnection;
 import locationserver.model.Device;
+import locationserver.response.Response;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,47 +14,36 @@ import java.util.List;
  * Created by Jim on 15-3-2016.
  */
 @RestController
-@RequestMapping("/tracker")
+@RequestMapping("/device")
 public class DeviceController {
 
-    List<Device> list;
 
     @RequestMapping(value = "/getAllDevices", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Device> getAllTrackers(){
-    return new DatabaseConnection().getDevices();
+    public List<Device> getAllDevices() {
+        return new DatabaseConnection().getDevices();
     }
 
-    @RequestMapping(value = "removeTracker/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "deleteDevice/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public List<Device> deleteTracker(@PathVariable("id") int id) {
-return new ArrayList<>();
+    public List<Device> deleteDevice(@PathVariable("id") int id) {
+        return new ArrayList<>();
     }
 
-    @RequestMapping(value = "/getTracker/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getDevice/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Device getTracker(@PathVariable("id") int id) {
-        if (id > list.size()) {
-            return null;
-        }
-
-        for (Device device : list) {
-            if (id == device.getId()) {
-                return null;
-            }
-        }
-        return null;
+    public Device getDevice(@PathVariable("id") int id) {
+        return new Device();
     }
 
-    @RequestMapping(value = "/addTracker", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addDevice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Device> addTracker(@RequestBody Device device) {
-
-
-        return list;
+    public Response addDevice(@RequestBody Device device) {
+        return Response.SUCCES;
     }
 
-
-
-
-
+    @RequestMapping(value = "/updateDevice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Response updateDevice(@RequestBody Device device) {
+        return Response.SUCCES;
+    }
 }

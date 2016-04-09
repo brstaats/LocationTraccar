@@ -4,6 +4,7 @@ package locationserver.model;
  * Created by biezenj on 5-4-2016.
  */
 
+import java.sql.Timestamp;
 import java.util.UUID;
 public class Job {
 
@@ -12,6 +13,25 @@ public class Job {
     int client_uuid, outerregion_meter,innerregion_meter, priority;
     boolean finished;
     double latitude, longitude, altitude;
+    Timestamp startDate;
+
+    public Timestamp getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Timestamp endDate) {
+        this.endDate = endDate;
+    }
+
+    public Timestamp getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Timestamp startDate) {
+        this.startDate = startDate;
+    }
+
+    Timestamp endDate;
 
     public UUID getUuid() {
         return uuid;

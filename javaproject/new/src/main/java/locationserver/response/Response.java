@@ -6,6 +6,7 @@ package locationserver.response;
 public enum Response {
 
     NO_ADMIN_RIGHTS("Provided user has no admin rights", 400),
+    DELETE_SUCCES("Succesfully deleted", 200),
     WRONG_AUTHENTICATION("Wrong authentication number", 400),
     ARGUMENT_DOES_NOT_EXIST("Provided argument does not exist", 400),
     MAX_TRACKERS_EXCEEDED("Max trackers for license exceeded", 300),
