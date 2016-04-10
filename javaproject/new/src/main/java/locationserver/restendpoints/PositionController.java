@@ -1,8 +1,7 @@
 package locationserver.restendpoints;
 
 
-import locationserver.database.DatabaseConnection;
-import locationserver.model.Job;
+import locationserver.model.Position;
 import locationserver.response.Response;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,38 +12,38 @@ import java.util.List;
  * Created by Jim on 15-3-2016.
  */
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/position")
 public class PositionController {
 
-    List<Job> list;
+    List<Position> list;
 
-    @RequestMapping(value = "/getAllJobs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Job> getAllJobs(){
-        return new DatabaseConnection().getJobs();
-    }
-
-    @RequestMapping(value = "deleteJob/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public Response deleteJob(@PathVariable("id") int id) {
+    @RequestMapping(value = "/getAllPositions", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response getAllPositions(){
         return Response.DELETE_SUCCES;
     }
 
-    @RequestMapping(value = "/getJob/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "deletePosition/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Job getJob(@PathVariable("id") String id) {
-
-        return new DatabaseConnection().getJob(id);
+    public Response deletePosition(@PathVariable("id") int id) {
+        return Response.DELETE_SUCCES;
     }
 
-    @RequestMapping(value = "/addJob", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getPosition/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Response addJob(@RequestBody Job Job) {
+    public Response getPosition(@PathVariable("id") String id) {
+
+        return Response.DELETE_SUCCES;
+    }
+
+    @RequestMapping(value = "/addPosition", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Response addPosition(@RequestBody Position Position) {
         return Response.SUCCES;
     }
 
-    @RequestMapping(value = "/updateJob", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/updatePosition", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Response updateJob(@RequestBody Job Job) {
+    public Response updatePosition(@RequestBody Position Position) {
         return Response.SUCCES;
     }
 

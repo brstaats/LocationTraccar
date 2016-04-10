@@ -1,16 +1,37 @@
 package locationserver.model;
 
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by biezenj on 5-4-2016.
  */
-public class Device {
 
-    int id, positionId;
-    String name, uniqueId,status;
-   Timestamp lastUpdate;
+@Entity
+@Table(name = "devices")
+public class Device implements Serializable {
+
+    @Id
+    @GeneratedValue
+    int id;
+    int positionId;
+    String name;
+    String uniqueId;
+    String status;
+    Timestamp lastUpdate;
+
+    protected Device() {
+    }
+
+    public Device(int positionId,String name, String uniqueId,String status, Timestamp lastUpdate) {
+        this.positionId = positionId;
+        this.name = name;
+        this.uniqueId = uniqueId;
+        this.status = status;
+        this.lastUpdate = lastUpdate;
+    }
 
     public int getId() {
         return id;
