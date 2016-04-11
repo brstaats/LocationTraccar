@@ -4,16 +4,30 @@ package locationserver.model;
  * Created by biezenj on 5-4-2016.
  */
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.UUID;
+@Entity
+@Table(name = "jobs")
 public class Job {
 
+    @Id
+    @GeneratedValue
+    @Type(type="pg-uuid")
     UUID uuid;
     String name, address;
     int client_uuid, outerregion_meter,innerregion_meter, priority;
     boolean finished;
-    double latitude, longitude, altitude;
+    double latitude, longitude;
+    double altitude;
     Timestamp startDate;
+
+    protected Job(){}
 
     public Timestamp getEndDate() {
         return endDate;

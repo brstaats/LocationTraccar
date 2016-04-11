@@ -1,12 +1,15 @@
 package locationserver.restendpoints;
 
 
+import locationserver.database.DatabaseConnection;
+import locationserver.database.repositories.JobRepository;
 import locationserver.model.Job;
 import locationserver.response.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Jim on 15-3-2016.
@@ -15,37 +18,40 @@ import java.util.List;
 @RequestMapping("/job")
 public class JobController {
 
-    List<Job> list;
+    @Autowired
+    DatabaseConnection<Job> db;
 
-    @RequestMapping(value = "/getAllJobs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void getAllJobs(){
+    @Autowired
+    JobRepository repository;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Job> getAllJobs() {
+        return db.getAll(repository);
     }
 
-    @RequestMapping(value = "deleteJob/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
     @ResponseBody
-    public Response deleteJob(@PathVariable("id") int id) {
+    public Response deleteJobs(@PathVariable("id") int id) {
+        db.delete(repository,id);
         return Response.DELETE_SUCCES;
     }
 
-    @RequestMapping(value = "/getJob/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public void getJob(@PathVariable("id") String id) {
-
-
+    public Job getJobs(@PathVariable("id") UUID id) {
+        return db.findByUuid(repository, (UUID) id);
     }
 
-    @RequestMapping(value = "/addJob", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/add/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Response addJob(@RequestBody Job Job) {
-        return Response.SUCCES;
+    public Job addJob(@RequestBody Job job) {
+        return db.add(repository,job);
     }
 
-    @RequestMapping(value = "/updateJob", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Response updateJob(@RequestBody Job Job) {
-        return Response.SUCCES;
+    public Job updateJob(@RequestBody Job job) {
+        return db.update(repository,job);
     }
-
-
 }
+

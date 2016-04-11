@@ -1,42 +1,42 @@
 package locationserver.database;
 
-import locationserver.database.repositories.DeviceRepository;
-import locationserver.model.Device;
+import locationserver.database.repositories.JobRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Jim on 15-3-2016.
  */
 
 @Component
-public class DatabaseConnection {
+public class DatabaseConnection<T> {
 
     public DatabaseConnection() {}
 
-    public Device getDeviceById(DeviceRepository repository, int id){
-        return repository.findOne(id);
+    public T getById(CrudRepository repository, int id){
+        return (T) repository.findOne(id);
     }
 
-    public List<Device> getDeviceByName(DeviceRepository repository, String name){
-        return repository.findByName(name);
-    }
-
-    public Iterable<Device> getAllDevices(DeviceRepository repository){
+    public Iterable<T> getAll(CrudRepository repository){
         return repository.findAll();
     }
 
-    public void deleteDevice(DeviceRepository repository, int id){
+    public void delete(CrudRepository repository, int id){
         repository.delete(id);
     }
 
-    public Device updateDevice(DeviceRepository repository, Device device){
-        return repository.save(device);
+    public T update(CrudRepository repository, T t){
+        return (T) repository.save(t);
     }
 
-    public Device addDevice(DeviceRepository repository, Device device){
-        return repository.save(device);
+    public T add(CrudRepository repository, T t){
+        return (T) repository.save(t);
+    }
+
+    public T findByUuid(JobRepository repository, UUID uuid){
+        return (T) repository.findByUuid((UUID) uuid);
     }
 
 }
